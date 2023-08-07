@@ -29,6 +29,8 @@ jobs:
 
           netstat -tuln
           ufw stop
+
+          curl http://$MINIKUBE_IP/
           
           curl http://minikubeip.com/
           curl http://minikubeip.com/healthcheck
