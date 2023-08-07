@@ -27,8 +27,8 @@ jobs:
         run: |
          # cd helm/task1
          # helm install task1 .
-         kubectl apply -f yaml/Deployment.yaml
-         kubectl apply -f yaml/Service.yaml
+         kubectl apply -f ./yamls/Deployment.yaml
+         kubectl apply -f ./yamls/Service.yaml
          
       - name: Map Minikube IP to Hosts file for ingress
         run: |
