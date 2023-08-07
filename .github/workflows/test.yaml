@@ -22,7 +22,7 @@ jobs:
           sudo install minikube-linux-amd64 /usr/local/bin/minikube
           minikube start
           cd helm/task1
-          helm install task1 task1 .
+          helm install task1 .
           export MINIKUBE_IP=$(minikube ip)
           sudo echo "$MINIKUBE_IP minikubeip.com" | sudo tee -a /etc/hosts > /dev/null
           sudo echo "$MINIKUBE_IP notminikubeip.com" | sudo tee -a /etc/hosts > /dev/null
