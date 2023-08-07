@@ -1,0 +1,25 @@
+name: Test
+
+on:
+  workflow_dispatch:
+    inputs:
+      deploy_cluster:
+        description: 'Deploy the Kubernetes cluster for testing'
+        required: true
+        default: 'true'
+
+jobs:
+  setup_kubernetes:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Kubernetes cluster
+        run: |
+          kubectl apply -f deployment.yaml
+          kubectl apply -f service.yaml
+          kubectl apply -f ingress.yaml
+
+  
