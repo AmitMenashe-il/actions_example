@@ -18,6 +18,12 @@ jobs:
 
       - name: Set up Kubernetes cluster
         run: |
+          pwd
+          can actions_example
+          pwd
+          cd yaml
+          pwd
+          ls
           kubectl apply -f actions_example/yamls/Deployment.yaml
           kubectl apply -f actions_example/yamls/Service.yaml
           kubectl apply -f actions_example/yamls/Ingress.yaml
