@@ -27,9 +27,8 @@ jobs:
           sudo echo "$MINIKUBE_IP minikubeip.com" | sudo tee -a /etc/hosts > /dev/null
           sudo echo "$MINIKUBE_IP notminikubeip.com" | sudo tee -a /etc/hosts > /dev/null
 
-          netstat -tuln
-          ufw stop
-
+          kubectl get all
+          
           curl http://$MINIKUBE_IP/
           
           curl http://minikubeip.com/
