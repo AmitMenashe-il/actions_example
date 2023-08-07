@@ -41,6 +41,11 @@ jobs:
             sleep 10
           done
 
+      - name: Curl to the app
+        run: |
+
+          cat /etc/hosts
+          ping -c 3 minikubeip.com
           kubectl get all
           kubectl get ingress
           kubectl get nodes -o wide
