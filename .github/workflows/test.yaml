@@ -25,8 +25,8 @@ jobs:
           kubectl apply -f ./yamls/Service.yaml
           kubectl apply -f ./yamls/Ingress.yaml
           export MINIKUBE_IP=$(minikube ip)
-          sudo echo "$MINIKUBE_IP minikubeip.com" >> /etc/hosts
-          sudo echo "$MINIKUBE_IP notminikubeip.com" >> /etc/hosts
+          sudo echo "$MINIKUBE_IP minikubeip.com" | sudo tee -a /etc/hosts > /dev/null
+          sudo echo "$MINIKUBE_IP notminikubeip.com" | sudo tee -a /etc/hosts > /dev/null
           curl http://minikubeip.com/
           curl http://minikubeip.com/healthcheck
           curl http://notminikubeip.com/
