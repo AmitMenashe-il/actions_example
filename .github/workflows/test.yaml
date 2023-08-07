@@ -27,7 +27,10 @@ jobs:
           sudo echo "$MINIKUBE_IP minikubeip.com" | sudo tee -a /etc/hosts > /dev/null
           sudo echo "$MINIKUBE_IP notminikubeip.com" | sudo tee -a /etc/hosts > /dev/null
 
-          kubectl get all
+          while [[ $ready_pods -lt 1 ]]; do
+            ready_pods=$(kubectl get deployment "task1" -o jsonpath='{.status.readyReplicas}')
+            echo "Waiting for pods to be ready... (Ready pods: $ready_pods)"
+            sleep 10
           
           curl http://$MINIKUBE_IP/
           
