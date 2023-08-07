@@ -18,7 +18,7 @@ jobs:
 
       - name: Set up Kubernetes cluster
         run: |
-          cat ./yamls/Deployment.yaml
+          kubectl get nodes
           kubectl apply -f ./yamls/Deployment.yaml
           kubectl apply -f ./yamls/Service.yaml
           kubectl apply -f ./yamls/Ingress.yaml
