@@ -27,6 +27,12 @@ jobs:
           export MINIKUBE_IP=$(minikube ip)
           sudo echo "$MINIKUBE_IP minikubeip.com" | sudo tee -a /etc/hosts > /dev/null
           sudo echo "$MINIKUBE_IP notminikubeip.com" | sudo tee -a /etc/hosts > /dev/null
+          echo minikube ip
+          minikube ip
+          echo env
+          env
+          echo hosts
+          cat /etc/hosts
           curl http://minikubeip.com/
           curl http://minikubeip.com/healthcheck
           curl http://notminikubeip.com/
