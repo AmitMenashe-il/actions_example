@@ -24,6 +24,10 @@ jobs:
           kubectl apply -f ./yamls/Deployment.yaml
           kubectl apply -f ./yamls/Service.yaml
           kubectl apply -f ./yamls/Ingress.yaml
-          curl http://127.0.0.1/healthcheck
-          
+          echo "127.0.0.1 minikubeip.com" >> /etc/hosts
+          echo "127.0.0.1 notminikubeip.com" >> /etc/hosts
+          curl http://minikubeip.com/
+          curl http://notminikubeip.com/
+          curl http://minikubeip.com/healthcheck
+
   
