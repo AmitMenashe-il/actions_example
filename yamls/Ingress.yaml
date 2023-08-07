@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: task1-ingress
+spec:
+  rules:
+  - host: minikubeip.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: task1
+            port:
+              number: 80
+      - path: /healthcheck
+        pathType: Prefix
+        backend:
+          service:
+            name: task1
+            port:
+              number: 80
+
