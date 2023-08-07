@@ -21,13 +21,15 @@ jobs:
           curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
           sudo install minikube-linux-amd64 /usr/local/bin/minikube
           minikube start
-          minikube addons enable ingress
+          #minikube addons enable ingress
       
       - name: Install Helm chart
         run: |
-          cd helm/task1
-          helm install task1 .
-
+         # cd helm/task1
+         # helm install task1 .
+         kubectl apply -f yaml/Deployment.yaml
+         kubectl apply -f yaml/Service.yaml
+         
       - name: Map Minikube IP to Hosts file for ingress
         run: |
           export MINIKUBE_IP=$(minikube ip)
@@ -45,13 +47,7 @@ jobs:
       - name: Curl to the app
         run: |
         
-         # cat /etc/hosts
-         # ping -c 3 minikubeip.com
-         # kubectl get all
-         # kubectl get ingress
-         # kubectl get nodes -o wide
-        
-        
+                 
           curl http://minikubeip.com/
           curl http://minikubeip.com/healthcheck
           curl http://notminikubeip.com/
