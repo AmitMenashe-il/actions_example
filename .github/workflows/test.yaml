@@ -18,8 +18,8 @@ jobs:
 
       - name: Set up Kubernetes cluster
         run: |
-          kubectl apply -f /yamls/deployment.yaml
-          kubectl apply -f /yamls/service.yaml
-          kubectl apply -f /yamls/ingress.yaml
+          kubectl apply -f /yamls/Deployment.yaml
+          kubectl apply -f /yamls/Service.yaml
+          kubectl apply -f /yamls/Ingress.yaml
 
   
