@@ -46,8 +46,6 @@ jobs:
 
       - name: Curl to the app
         run: |
-        
-                 
           curl http://minikubeip.com/
           curl http://minikubeip.com/healthcheck
           curl http://notminikubeip.com/
