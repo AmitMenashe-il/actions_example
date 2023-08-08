@@ -25,7 +25,7 @@ jobs:
       
       - name: Install Helm chart
         run: |
-         cd helm/task12
+         cd helm/noIngress
          helm install task1 .
          
       - name: Map Minikube IP to Hosts file for ingress
