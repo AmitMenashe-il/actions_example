@@ -36,9 +36,7 @@ jobs:
           
           #adding no ingress test
           export NODEPORT=$(kubectl get svc task1 -o=jsonpath='{.spec.ports[0].nodePort}')
-          kubectl get svc
-          env
-         
+                   
       - name: Wait for pod
         run: |
           while [[ $ready_pods -lt 1 ]]; do
