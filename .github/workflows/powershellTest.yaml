@@ -1,0 +1,55 @@
+name: Test
+
+on:
+  workflow_dispatch:
+    inputs:
+      deploy_cluster:
+        description: 'Deploy the Kubernetes cluster for testing'
+        required: true
+        default: 'true'
+
+jobs:
+  setup_kubernetes:
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      #- name: Set up Kubernetes cluster
+        #run: |
+          #curl -O https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+          #sudo install minikube-linux-amd64 /usr/local/bin/minikube
+          #minikube start
+          #minikube addons enable ingress
+      
+      - name: Install Helm chart
+        run: |
+         cd helm/task1
+         helm install task1 .
+         
+      #- name: Map Minikube IP to Hosts file for ingress
+        #run: |
+          #export MINIKUBE_IP=$(minikube ip)
+          #sudo echo "$MINIKUBE_IP minikubeip.com" | sudo tee -a /etc/hosts > /dev/null
+          #sudo echo "$MINIKUBE_IP notminikubeip.com" | sudo tee -a /etc/hosts > /dev/null
+
+      - name: Wait for pod
+        run: |
+          $ready_pods = 0
+          while ($ready_pods -lt 1) {
+          $ready_pods = kubectl get deployment "task1" -o jsonpath='{.status.readyReplicas}'
+          Write-Host "Waiting for pods to be ready... (Ready pods: $ready_pods)"
+          Start-Sleep -Seconds 10
+          }
+
+      - name: Curl to the app
+        run: |
+          kubectl get all
+          kubectl describe ingress task1-ingress
+          ping -c 3 minikubeip.com
+          #cat /etc/hosts
+          
+          curl http://minikubeip.com/
+          curl http://minikubeip.com/healthcheck
+          curl http://notminikubeip.com/
