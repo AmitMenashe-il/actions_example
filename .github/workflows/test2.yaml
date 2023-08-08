@@ -33,13 +33,12 @@ jobs:
           export MINIKUBE_IP=$(minikube ip)
           sudo echo "$MINIKUBE_IP minikubeip.com" | sudo tee -a /etc/hosts > /dev/null
           sudo echo "$MINIKUBE_IP notminikubeip.com" | sudo tee -a /etc/hosts > /dev/null
-          # Get the NodePort from the Kubernetes Service
-          NODEPORT=$(kubectl get svc task1 -o=jsonpath='{.spec.ports[0].nodePort}')
-
-          # Export the NodePort as an environment variable
-          export NODEPORT
-
-
+          
+          #adding no ingress test
+          export NODEPORT=$(kubectl get svc task1 -o=jsonpath='{.spec.ports[0].nodePort}')
+          kubectl get svc
+          env
+         
       - name: Wait for pod
         run: |
           while [[ $ready_pods -lt 1 ]]; do
