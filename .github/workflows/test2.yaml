@@ -36,7 +36,7 @@ jobs:
           
           #adding no ingress test
           export NODEPORT=$(kubectl get svc task1 -o=jsonpath='{.spec.ports[0].nodePort}')
-          env | grep -E 'MINIKUBE_IP|NODEPORT'
+          env | grep -E 'MINIKUBE_IP|NODEPORT' >> $GITHUB_ENV
                    
       - name: Wait for pod
         run: |
@@ -47,7 +47,7 @@ jobs:
           done
       - name: Curl to the app
         run: |
-          env
+          cat $GITHUB_ENV
           
           echo "running curl to ${MINIKUBE_IP}:${NODEPORT}"
           curl http://$MINIKUBE_IP:${NODEPORT}/
