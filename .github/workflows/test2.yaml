@@ -46,8 +46,8 @@ jobs:
           done
       - name: Curl to the app
         run: |
-          echo "running curl to $MINIKUBE_IP:$NODEPORT"
-          curl http://$MINIKUBE_IP:$NODEPORT/
-          curl http://minikubeip.com:$NODEPORT/
-          curl http://minikubeip.com:$NODEPORT/healthcheck
-          curl http://notminikubeip.com:$NODEPORT/
+          echo "running curl to ${MINIKUBE_IP}:${NODEPORT}"
+          curl http://$MINIKUBE_IP:${NODEPORT}/
+          curl http://minikubeip.com:${NODEPORT}/
+          curl http://minikubeip.com:${NODEPORT}/healthcheck
+          curl http://notminikubeip.com:${NODEPORT}/
