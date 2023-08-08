@@ -46,6 +46,7 @@ jobs:
           done
       - name: Curl to the app
         run: |
+          env | grep -E 'MINIKUBE_IP|NODEPORT'
           echo "running curl to ${MINIKUBE_IP}:${NODEPORT}"
           curl http://$MINIKUBE_IP:${NODEPORT}/
           curl http://minikubeip.com:${NODEPORT}/
