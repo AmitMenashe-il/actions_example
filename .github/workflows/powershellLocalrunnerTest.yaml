@@ -15,7 +15,17 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      
+
+      - name: Check Minikube status
+        run: |
+         $statusHost = $response | ConvertFrom-Json | Select-Object -ExpandProperty host
+         $statusKubelet = $response | ConvertFrom-Json | Select-Object -ExpandProperty kubelet
+         $statusApiserver = $response | ConvertFrom-Json | Select-Object -ExpandProperty apiserver
+    
+         if ($statusHost -ne $desired -or $statusKubelet -ne $desired -or $statusApiserver -ne $desired) {
+         Exit 1
+         }
+        
       - name: Install Helm chart
         run: |
          cd helm/task1
